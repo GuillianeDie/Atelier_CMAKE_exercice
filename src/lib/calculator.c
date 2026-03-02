@@ -19,7 +19,3 @@ double _div(double a, double b) {
 int carre (int a) {
 	return a * a;
 }
-
-int div (int a){
-	return a / 2;
-}
