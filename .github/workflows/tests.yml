@@ -30,7 +30,7 @@ jobs:
           make
           ./src/calculator add 10 5
 
-  Test_Carre:
+  Test_car:
     runs-on: ubuntu-latest
     needs: Compilation
     steps:
@@ -44,10 +44,25 @@ jobs:
           cmake ..
           make
           ./src/calculator car 5
+  
+  Test_div:
+    runs-on: ubuntu-latest
+    needs: Compilation
+    steps:
+      - name: Test fonction division
+        run: |
+          last_directory=$(basename ${{ runner.workspace }})
+          git clone https://github.com/${{ github.repository }}.git
+          cd ./$last_directory
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ./src/calculator div 5
 
   Deploy:
     runs-on: ubuntu-latest
-    needs: [Test_Add, Test_Carre]
+    needs: [Test_Add, Test_car, Test_div]
     steps:
       - name: Deploiement
         run: echo "Déploiement de la solution"
